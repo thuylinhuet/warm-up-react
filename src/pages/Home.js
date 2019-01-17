@@ -9,17 +9,17 @@ import {
 
 const items = [
 	{
-		src: 'https://picsum.photos/?random',
+		src: 'https://picsum.photos/1000/391/?image=866',
 		altText: 'Slide 1',
 		caption: 'Slide 1'
 	},
 	{
-		src: 'https://picsum.photos/?random',
+		src: 'https://picsum.photos/1000/391/?image=865',
 		altText: 'Slide 2',
 		caption: 'Slide 2'
 	},
 	{
-		src: 'https://picsum.photos/?random',
+		src: 'https://picsum.photos/1000/391/?image=867',
 		altText: 'Slide 3',
 		caption: 'Slide 3'
 	}
@@ -63,8 +63,7 @@ class Home extends React.Component {
 	}
 
 	render() {
-		return (
-			const { activeIndex } = this.state;
+		const { activeIndex } = this.state;
 
 		const slides = items.map((item) => {
 			return (
@@ -80,16 +79,18 @@ class Home extends React.Component {
 		});
 
 		return (
-			<Carousel
-				activeIndex={activeIndex}
-				next={this.next}
-				previous={this.previous}
-			>
-				<CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-				{slides}
-				<CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-				<CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-			</Carousel>
+			<div className='container'>
+				<Carousel
+					activeIndex={activeIndex}
+					next={this.next}
+					previous={this.previous}
+				>
+					<CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+					{slides}
+					<CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+					<CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+				</Carousel>
+			</div>
 		)
 	}
 }
