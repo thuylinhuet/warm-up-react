@@ -79,7 +79,7 @@ class Home extends React.Component {
 		});
 
 		return (
-			<div className='container'>
+			<div className='container' style={{paddingTop:'80px'}}>
 				<Carousel
 					activeIndex={activeIndex}
 					next={this.next}

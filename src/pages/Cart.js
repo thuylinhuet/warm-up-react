@@ -5,7 +5,7 @@ import { CartContext } from '../contexts/Cart';
 class Cart extends React.Component {
   render() {
     return (
-      <div className='container'>
+      <div className='container' style={{paddingTop:'80px'}}>
         <h1 className='text-center'>Your Cart</h1>
         <hr />
         <div className='row'>
@@ -68,7 +68,7 @@ class Cart extends React.Component {
                     <h4>{cartItems.length}</h4>
                   </div>
                   <div className='col-md-2'>
-                    <h4>${total}</h4>
+                    <h4>${total.toFixed(2)}</h4>
                   </div>
                 </div>
               ) : <div></div>

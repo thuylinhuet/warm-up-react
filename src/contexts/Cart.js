@@ -5,7 +5,7 @@ export const CartContext = React.createContext();
 export class CartProvider extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       cartItems: [],
       total: 0,
@@ -20,6 +20,10 @@ export class CartProvider extends React.Component {
       cartItems: this.state.cartItems.concat(product),
       total: this.state.total + parseFloat(product.price.substring(1))
     });
+
+    localStorage.setItem('cartItems', JSON.stringify(this.state.cartItems));
+    localStorage.setItem('total', this.state.total.toString());
+    console.log("aBC");
   }
 
   removeFromCart(product) {
@@ -31,7 +35,24 @@ export class CartProvider extends React.Component {
       cartItems: [...newItems],
       total: this.state.total - parseFloat(product.price.substring(1))
     })
+
+    localStorage.setItem('cartItems', JSON.stringify(this.state.cartItems));
+    localStorage.setItem('total', this.state.total.toString());
   }
+
+  // componentDidMount() {
+  //   this.handleDataFromLocalStorage();
+  // }
+
+  // handleDataFromLocalStorage(){
+  //   let cartItems = JSON.parse(localStorage.getItem('cartItems'));
+  //   let total = parseFloat(localStorage.getItem('total'));
+
+  //   this.setState({
+  //     cartItems: cartItems,
+  //     total: total
+  //   })
+  // }
 
   render() {
     return (

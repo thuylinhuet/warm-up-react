@@ -14,14 +14,27 @@ class ProductList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			products: ProductAPI.all(),
+			products: [],
 		}
+	}
+
+	componentWillMount(){
+		this.getProductList().then(product => {
+			console.log(product);
+		})
+	}
+
+	getProductList = async () => {
+		const productList = await ProductAPI.getProductList();
+		this.setState({
+			products: productList,
+		})
 	}
 
 	render() {
 		return (
 			<Router>
-				<Container>
+				<Container style={{paddingTop:'80px'}}>
 					<h2>Products</h2>
 					<Row>
 						{this.state.products.map(product => (
@@ -32,7 +45,7 @@ class ProductList extends React.Component {
 										src={product.imgUrl}
 										alt="Card image cap" />
 									<CardBody>
-										<CardTitle><Link to={`/products/${product.id}`}>{product.name}</Link></CardTitle>
+										<CardTitle><Link to={`/products/${product._id}`}>{product.name}</Link></CardTitle>
 										<CardText>Price: {product.price}</CardText>
 										<CartContext.Consumer>
 											{({ addToCart }) => (
