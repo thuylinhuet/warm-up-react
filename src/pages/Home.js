@@ -10,18 +10,18 @@ import {
 const items = [
 	{
 		src: 'https://picsum.photos/1000/391/?image=866',
-		altText: 'Slide 1',
-		caption: 'Slide 1'
+		altText: 'Best Items',
+		caption: 'Best Items'
 	},
 	{
 		src: 'https://picsum.photos/1000/391/?image=865',
-		altText: 'Slide 2',
-		caption: 'Slide 2'
+		altText: 'Artist',
+		caption: 'Artist'
 	},
 	{
 		src: 'https://picsum.photos/1000/391/?image=867',
-		altText: 'Slide 3',
-		caption: 'Slide 3'
+		altText: 'Event',
+		caption: 'Event'
 	}
 ];
 

@@ -12,7 +12,7 @@ class Header extends React.Component {
 		return (
 			<Router>
 				<div>
-					<nav className='navbar navbar-expand-lg navbar-light bg-light'>
+					<nav className='navbar fixed-top navbar-expand-lg navbar-light bg-light'>
 						<a className='navbar-brand' href='/'>Shopping</a>
 						<div className='collapse navbar-collapse'>
 							<ul className='navbar-nav mr-auto'>

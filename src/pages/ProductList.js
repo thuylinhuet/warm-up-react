@@ -33,7 +33,7 @@ class ProductList extends React.Component {
 										alt="Card image cap" />
 									<CardBody>
 										<CardTitle><Link to={`/products/${product.id}`}>{product.name}</Link></CardTitle>
-										<CardText>{product.description}</CardText>
+										<CardText>Price: {product.price}</CardText>
 										<CartContext.Consumer>
 											{({ addToCart }) => (
 												<Button onClick={() => addToCart(product)}>
