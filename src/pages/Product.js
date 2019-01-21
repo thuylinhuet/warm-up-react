@@ -32,7 +32,7 @@ class Product extends React.Component {
 			<div className='container' style={{ paddingTop: '80px' }}>
 				<div className='row'>
 					<div className='col-md-4'>
-						<img src={this.state.product.imgUrl} alt='img'></img>
+						<img src={this.state.product.imgUrl} alt='img' width='300px' height='300px'></img>
 					</div>
 					<div className='col-md-8'>
 						<h1> {this.state.product.name} </h1>
