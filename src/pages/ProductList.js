@@ -18,7 +18,7 @@ class ProductList extends React.Component {
 		}
 	}
 
-	componentWillMount(){
+	componentDidMount(){
 		this.getProductList().then(product => {
 			console.log(product);
 		})
@@ -59,10 +59,7 @@ class ProductList extends React.Component {
 							</Col>
 						))}
 					</Row>
-					<Route path='/products/:id' component={Product} />
 				</Container>
-
-
 			</Router>
 		);
 	}

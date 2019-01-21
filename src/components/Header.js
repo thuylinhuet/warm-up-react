@@ -1,29 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
-import Home from '../pages/Home';
-import ProductList from '../pages/ProductList';
-import About from '../pages/About';
-import Cart from '../pages/Cart';
 import { CartContext } from '../contexts/Cart';
 
 class Header extends React.Component {
 	render() {
 		return (
 			<Router>
-				<div>
+				<header>
 					<nav className='navbar fixed-top navbar-expand-lg navbar-light bg-light'>
 						<a className='navbar-brand' href='/'>Shopping</a>
 						<div className='collapse navbar-collapse'>
 							<ul className='navbar-nav mr-auto'>
 								<li className='nav-item active' style={{ paddingRight: '15px' }}>
 									<Link to='/'>Home</Link>
+									{/* <a href='/'>Home</a> */}
 								</li>
 								<li className='nav-item' style={{ paddingRight: '15px' }}>
 									<Link to='/products'>Products</Link>
+									{/* <a href='products'>Products</a> */}
 								</li>
 								<li className='nav-item' style={{ paddingRight: '15px' }}>
 									<Link to='/about'>About</Link>
+									{/* <a href='/about'>About</a> */}
 								</li>
 							</ul>
 							<form className='form-inline'>
@@ -39,12 +38,7 @@ class Header extends React.Component {
 							</CartContext.Consumer>
 						</li>
 					</nav>
-
-					<Route exact path='/' component={Home} />
-					<Route path='/products' component={ProductList} />
-					<Route path='/about' component={About} />
-					<Route path='/cart' component={Cart} />
-				</div>
+				</header>
 			</Router>
 		);
 	}

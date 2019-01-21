@@ -15,5 +15,22 @@ export default {
         return err
       }
     })
-	}
+  },
+  
+  getProduct: (id) => {
+    return Axios({
+      method: 'GET',
+      url: 'http://localhost:5555/api/products/'+ id,
+      data: null
+    }).then(res => {
+      console.log('found product');
+      console.log(res.data.product);
+      return res.data.product;
+    }).catch(err => {
+      if (err) {
+        console.log(err);
+        return err;
+      }
+    })
+  }
 }
