@@ -4,10 +4,10 @@ export default {
   getProductList: () => {
     return Axios({
       method: 'GET',
-      url: 'http://localhost:5555/api/products',
+      url: 'http://localhost:5001/api/products',
       data: null
     }).then(res => {
-      console.log("axois success");
+      // console.log("axois success");
       return res.data.products;
     }).catch(err => {
       if (err) {
@@ -20,7 +20,7 @@ export default {
   getProduct: (id) => {
     return Axios({
       method: 'GET',
-      url: 'http://localhost:5555/api/products/' + id,
+      url: 'http://localhost:5001/api/products/' + id,
       data: null
     }).then(res => {
       console.log('found product');
@@ -43,11 +43,28 @@ export default {
     }
     return Axios({
       method: 'POST',
-      url: 'http://localhost:5555/api/products/create',
+      url: 'http://localhost:5001/api/products/create',
       data: product
     }).then(res => {
       console.log(res.data.product);
       return res.data.product;
+    }).catch(err => {
+      if (err) {
+        console.log(err);
+        return err;
+      }
+    })
+  },
+
+  deleteProduct: (product) => {
+    let id = product._id;
+    console.log(product);
+    return Axios({
+      method: 'POST',
+      url: 'http://localhost:5001/api/products/delete',
+      data: id
+    }).then(res => {
+      console.log(res.data.content);
     }).catch(err => {
       if (err) {
         console.log(err);

@@ -1,10 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import {
-	Container, Row, Col,
-	Card, CardImg, CardText, CardBody,
-	CardTitle, Button
-} from 'reactstrap';
 
 import ProductAPI from '../api/ProductAPI';
 import { CartContext } from '../contexts/Cart';
@@ -17,12 +12,14 @@ class ProductList extends React.Component {
 		}
 
 		this.createProduct = this.createProduct.bind(this);
+		this.deleteProduct = this.deleteProduct.bind(this);
 	}
 
 	componentDidMount() {
-		this.getProductList().then(product => {
-			console.log(product);
-		})
+		// this.getProductList().then(product => {
+		// 	console.log(product);
+		// })
+		this.getProductList()
 	}
 
 	getProductList = async () => {
@@ -37,9 +34,21 @@ class ProductList extends React.Component {
 		this.props.history.push({ pathname: '/products/create' })
 	}
 
+	async deleteProduct(product) {
+		console.log('delete');
+		await ProductAPI.deleteProduct(product);
+		const newProducts = this.state.products.filter(item => {
+			return item !== product;
+		});
+
+		this.setState({
+			products: [...newProducts]
+		})
+	}
+
 	render() {
 		return (
-			<Container style={{ padding: '70px' }}>
+			<div className='container' style={{ padding: '70px' }}>
 				<h2>Products</h2>
 				<div>
 					<button className='btn btn-success'
@@ -48,30 +57,37 @@ class ProductList extends React.Component {
 					</button>
 				</div>
 				<br />
-				<Row>
+
+				 {/* (this.state.products.length !== 0) ? ( <h5>No product.</h5> ) :  */}
+					<div className='row'>
 					{this.state.products.map(product => (
-						<Col md='3' sm='2' key={product.id}>
-							<Card>
-								<CardImg top
+						<div className='col-md-3 col-sm-2' key={product.id}>
+							<div className='card'>
+								<img className='card-img-top'
 									width="100%"
 									src={product.imgUrl}
-									alt="Card image cap" />
-								<CardBody>
-									<CardTitle><Link to={`/products/${product._id}`}>{product.name}</Link></CardTitle>
-									<CardText>Price: {product.price}</CardText>
-									<CartContext.Consumer>
-										{({ addToCart }) => (
-											<Button onClick={() => addToCart(product)}>
-												Add to cart
-											</Button>
-										)}
-									</CartContext.Consumer>
-								</CardBody>
-							</Card>
-						</Col>
+									alt="Product cap" />
+								<div className='card-body'>
+									<h5 className='card-title'><Link to={`/products/${product._id}`}>{product.name}</Link></h5>
+									<p className='card-text'>Price: {product.price}</p>
+									<div className='row'>
+										<CartContext.Consumer>
+											{({ addToCart }) => (
+												<button className='btn btn-primary' onClick={() => addToCart(product)}>
+													Add to cart
+											</button>
+											)}
+										</CartContext.Consumer>
+										<button className='btn btn-danger' onClick={() => this.deleteProduct(product)}>
+											Delete
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					))}
-				</Row>
-			</Container>
+				</div>
+			</div>
 		);
 	}
 }
