@@ -57,12 +57,12 @@ export default {
   },
 
   deleteProduct: (product) => {
-    let id = product._id;
-    console.log(product);
+    // let id = product._id;
+    // console.log(product);
     return Axios({
       method: 'POST',
       url: 'http://localhost:5001/api/products/delete',
-      data: id
+      data: product
     }).then(res => {
       console.log(res.data.content);
     }).catch(err => {
