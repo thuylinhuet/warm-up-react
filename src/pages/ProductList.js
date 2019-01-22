@@ -61,7 +61,7 @@ class ProductList extends React.Component {
 				 {/* (this.state.products.length !== 0) ? ( <h5>No product.</h5> ) :  */}
 					<div className='row'>
 					{this.state.products.map(product => (
-						<div className='col-md-3 col-sm-2' key={product.id}>
+						<div className='col-md-3 col-sm-2' key={product._id}>
 							<div className='card'>
 								<img className='card-img-top'
 									width="100%"

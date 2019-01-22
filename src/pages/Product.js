@@ -10,6 +10,8 @@ class Product extends React.Component {
 		this.state = {
 			product: ""
 		}
+
+		this.deleteProduct = this.deleteProduct.bind(this);
 	}
 
 	componentDidMount() {
@@ -27,6 +29,13 @@ class Product extends React.Component {
 		console.log(this.state.product);
 	}
 
+	async deleteProduct(product) {
+		console.log('delete this product');
+		await ProductAPI.deleteProduct(product);
+		this.props.history.push({ pathname: '/products' })
+	}
+
+
 	render() {
 		return (
 			<div className='container' style={{ paddingTop: '80px' }}>
@@ -41,13 +50,20 @@ class Product extends React.Component {
 						<br />
 						<h5><strong>Price: {this.state.product.price}</strong></h5>
 						<br />
-						<CartContext.Consumer>
-							{({ addToCart }) => (
-								<Button onClick={() => addToCart(this.state.product)}>
-									Add to cart
+						<div className='row'>
+							<CartContext.Consumer>
+								{({ addToCart }) => (
+									<Button onClick={() => addToCart(this.state.product)}>
+										Add to cart
 								</Button>
-							)}
-						</CartContext.Consumer>
+								)}
+							</CartContext.Consumer>
+
+							<button className='btn btn-danger' onClick={() => this.deleteProduct(this.state.product)}>
+								Delete
+							</button>
+						</div>
+
 					</div>
 				</div>
 			</div>
