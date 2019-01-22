@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'reactstrap';
 
 import ProductAPI from '../api/ProductAPI';
 import { CartContext } from '../contexts/Cart';
@@ -70,7 +69,6 @@ class Product extends React.Component {
 								Update
 							</button>
 						</div>
-
 					</div>
 				</div>
 			</div>

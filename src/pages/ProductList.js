@@ -58,35 +58,36 @@ class ProductList extends React.Component {
 				</div>
 				<br />
 
-				 {/* (this.state.products.length !== 0) ? ( <h5>No product.</h5> ) :  */}
+				{(this.state.products.length === 0) ? (<h5>No product.</h5>) :
 					<div className='row'>
-					{this.state.products.map(product => (
-						<div className='col-md-3 col-sm-2' key={product._id}>
-							<div className='card'>
-								<img className='card-img-top'
-									width="100%"
-									src={product.imgUrl}
-									alt="Product cap" />
-								<div className='card-body'>
-									<h5 className='card-title'><Link to={`/products/${product._id}`}>{product.name}</Link></h5>
-									<p className='card-text'>Price: {product.price}</p>
-									<div className='row' style={{ justifyContent: 'space-evenly' }}>
-										<CartContext.Consumer>
-											{({ addToCart }) => (
-												<button className='btn btn-primary' onClick={() => addToCart(product)}>
-													Add to cart
+						{this.state.products.map(product => (
+							<div className='col-md-3 col-sm-2' key={product._id}>
+								<div className='card'>
+									<img className='card-img-top'
+										width="100%"
+										src={product.imgUrl}
+										alt="Product cap" />
+									<div className='card-body'>
+										<h5 className='card-title'><Link to={`/products/${product._id}`}>{product.name}</Link></h5>
+										<p className='card-text'>Price: {product.price}</p>
+										<div className='row' style={{ justifyContent: 'space-evenly' }}>
+											<CartContext.Consumer>
+												{({ addToCart }) => (
+													<button className='btn btn-primary' onClick={() => addToCart(product)}>
+														Add to cart
 											</button>
-											)}
-										</CartContext.Consumer>
-										<button className='btn btn-danger' onClick={() => this.deleteProduct(product)}>
-											Delete
+												)}
+											</CartContext.Consumer>
+											<button className='btn btn-danger' onClick={() => this.deleteProduct(product)}>
+												Delete
 										</button>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					))}
-				</div>
+						))}
+					</div>
+				}
 			</div>
 		);
 	}
