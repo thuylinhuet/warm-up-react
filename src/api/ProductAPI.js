@@ -41,6 +41,7 @@ export default {
       price: price,
       imgUrl: url
     }
+    
     return Axios({
       method: 'POST',
       url: 'http://localhost:5001/api/products/create',
@@ -70,6 +71,28 @@ export default {
         console.log(err);
         return err;
       }
+    })
+  },
+
+  updateProduct: (_id, name, description, price, url) => {
+    let product = {
+      _id: _id,
+      name: name,
+      description: description,
+      price: price,
+      imgUrl: url
+    }
+
+    return Axios({
+      method: 'POST',
+      url: 'http://localhost:5001/api/products/update',
+      data: product
+    }).then(res => {
+      console.log(res.data.product);
+      return res.data.product;
+    }).catch(err => {
+      console.log(err);
+      return err;
     })
   }
 }

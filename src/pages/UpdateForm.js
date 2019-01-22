@@ -5,15 +5,36 @@ import ProductAPI from '../api/ProductAPI';
 class UpdateForm extends React.Component {
   constructor(props) {
     super(props);
+
+    console.log(this.props);
     this.state = {
+      // _id: "",
       name: "",
-      desciption: "",
+      description: "",
       price: "",
-      imgUrl: "",
+      imgUrl: ""
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.getProduct().then(product => {
+      console.log(product);
+    })
+  }
+
+  getProduct = async () => {
+    const product = await ProductAPI.getProduct(this.props.match.params.id);
+    console.log(product);
+    this.setState({
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      imgUrl: product.imgUrl
+    })
+    // console.log(this.state.product);
   }
 
   handleInputChange(e) {
@@ -26,10 +47,12 @@ class UpdateForm extends React.Component {
     });
   }
 
-  createProduct = async () => {
-    let product = await ProductAPI.createProduct(
+  updateProduct = async () => {
+    console.log(this.state.product);
+    let product = await ProductAPI.updateProduct(
+      this.props.match.params.id,
       this.state.name,
-      this.state.desciption,
+      this.state.description,
       this.state.price,
       this.state.imgUrl);
     return product;
@@ -37,7 +60,7 @@ class UpdateForm extends React.Component {
 
   handleSubmit(e) {
     console.log(this.state);
-    this.createProduct().then(product => {
+    this.updateProduct().then(product => {
       this.props.history.push({ pathname: `/products/${product._id}` })
     });
     e.preventDefault();
@@ -47,6 +70,7 @@ class UpdateForm extends React.Component {
     return (
       <div className='container' style={{ paddingTop: '70px' }}>
         <h3 className='text-center'>Update product</h3>
+        <h5 className='text-center'>{this.state.name}</h5>
         <form onSubmit={this.handleSubmit}>
           <div className='form-group'>
             <label for='name'>Product Name:</label>
@@ -56,10 +80,10 @@ class UpdateForm extends React.Component {
               required />
           </div>
           <div className='form-group'>
-            <label for='desciption'>Desciption:</label>
-            <input type='text' className='form-control' id='desciption'
+            <label for='description'>Description:</label>
+            <input type='text' className='form-control' id='description'
               onChange={this.handleInputChange}
-              value={this.state.desciption}
+              value={this.state.description}
               required ></input>
           </div>
           <div className='form-group'>

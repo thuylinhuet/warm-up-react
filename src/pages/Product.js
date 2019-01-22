@@ -12,6 +12,7 @@ class Product extends React.Component {
 		}
 
 		this.deleteProduct = this.deleteProduct.bind(this);
+		this.updateProduct = this.updateProduct.bind(this);
 	}
 
 	componentDidMount() {
@@ -35,6 +36,9 @@ class Product extends React.Component {
 		this.props.history.push({ pathname: '/products' })
 	}
 
+	updateProduct(product) {
+		this.props.history.push({ pathname: `/products/${product._id}/update` })
+	}
 
 	render() {
 		return (
@@ -50,17 +54,20 @@ class Product extends React.Component {
 						<br />
 						<h5><strong>Price: {this.state.product.price}</strong></h5>
 						<br />
-						<div className='row'>
+						<div className='row' style={{ justifyContent: 'space-evenly' }}>
 							<CartContext.Consumer>
 								{({ addToCart }) => (
-									<Button onClick={() => addToCart(this.state.product)}>
+									<button className='btn btn-primary' onClick={() => addToCart(this.state.product)}>
 										Add to cart
-								</Button>
+								</button>
 								)}
 							</CartContext.Consumer>
 
 							<button className='btn btn-danger' onClick={() => this.deleteProduct(this.state.product)}>
 								Delete
+							</button>
+							<button className='btn btn-success' onClick={() => this.updateProduct(this.state.product)}>
+								Update
 							</button>
 						</div>
 

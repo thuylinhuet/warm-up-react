@@ -70,7 +70,7 @@ class ProductList extends React.Component {
 								<div className='card-body'>
 									<h5 className='card-title'><Link to={`/products/${product._id}`}>{product.name}</Link></h5>
 									<p className='card-text'>Price: {product.price}</p>
-									<div className='row'>
+									<div className='row' style={{ justifyContent: 'space-evenly' }}>
 										<CartContext.Consumer>
 											{({ addToCart }) => (
 												<button className='btn btn-primary' onClick={() => addToCart(product)}>
